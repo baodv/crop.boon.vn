@@ -10,6 +10,7 @@
 	<title>Page Title</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <base href="{{asset('')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/croppic.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}">
 
     <script src="{{ asset('assets/js/jquery-2.1.3.min.js') }}"></script>
@@ -143,6 +144,40 @@
 
 <!-- Loading -->
 <div class="loading" id="js-loading">Loading&#8230;</div>
+<div class="site-mask"></div>
+<aside class="panel--sidebar" id="panel-cart">
+    <div class="panel__header">
+        <h4>Đặt hàng ngay</h4><span class="panel__close"></span>
+    </div>
+    <div class="panel__content">
+        <form action="" method="POST">
+            @csrf
+            <div class="ant-divider ant-divider-horizontal ant-divider-with-text-center" role="separator">
+                <span class="ant-divider-inner-text">Thông tin giao hàng</span>
+            </div>
+            <div class="cart--mini">
+                <div class="form-group">
+                    <label for="fullname require">Họ tên</label>
+                    <input id="fullname" class="form-control" type="text" name="fullname" placeholder="Nhập họ tên">
+                </div>
+                <div class="form-group">
+                    <label for="phone require">Số điện thoại</label>
+                    <input id="phone" class="form-control" type="text" name="phone" placeholder="Nhập số điện thoại">
+                </div>
+                <div class="form-group">
+                    <label for="address require">Địa chỉ</label>
+                    <input id="address" class="form-control" type="text" name="address" placeholder="Nhập địa chỉ">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" class="form-control" type="email" name="email" placeholder="Nhập Email">
+                </div>
+            </div>
+        </form>
+
+    </div>
+</aside>
+
 <!-- /Loading -->
     <script>
         function displayLoading() {
@@ -461,6 +496,27 @@
                 }
             });
         }
+
+
+        function togglePanel() {
+            $('.panel-trigger').on('click', function(e) {
+                e.preventDefault();
+                let target = $(this).attr('href');
+                $(target).addClass('active');
+                $(target).siblings('.panel--sidebar').removeClass('active');
+                $('.site-mask').addClass('active');
+                $('body').css('overflow', 'hidden');
+            });
+            $('.panel--sidebar .panel__close').on('click', function(e) {
+                e.preventDefault();
+                $(this).closest('.panel--sidebar').removeClass('active');
+                $('.site-mask').removeClass('active');
+                $('body').css('overflow', 'auto');
+            });
+        }
+        $(function() {
+            togglePanel();
+        });
     </script>
 </body>
 </html>

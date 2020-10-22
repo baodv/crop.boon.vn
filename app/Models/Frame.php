@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class Frame extends Model
 {
     /**
      * @var bool
@@ -15,7 +15,7 @@ class Image extends Model
      *
      * @var string
      */
-    protected $table = 'images';
+    protected $table = 'frames';
 
     /**
      * The attributes that are mass assignable.
